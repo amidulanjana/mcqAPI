@@ -7,7 +7,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const passport = require("passport");
 
-mongoose.connect("mongodb://localhost:auth/auth");
+mongoose.connect("mongodb://localhost:mcq/mcq");
 
 const app = express();
 

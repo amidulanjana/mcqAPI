@@ -9,11 +9,14 @@ const userSchema = new Schema({
   profileImg: String,
   googleID: String,
   facebookID: String,
-  password: String
+  password: String,
+  created_at: Date,
+  updated_at: Date
 });
 
 userSchema.pre("save", function(next) {
   const user = this;
+
   bcrypt.genSalt(10, function(err, salt) {
     if (err) {
       return next(err);
@@ -24,8 +27,9 @@ userSchema.pre("save", function(next) {
         user.password = hash;
         next();
       });
+    } else {
+      next();
     }
-    next();
   });
 });
 

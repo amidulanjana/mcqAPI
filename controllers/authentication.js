@@ -10,6 +10,8 @@ function tokenForUser(user) {
 exports.signup = function(req, res, next) {
   const email = req.body.email;
   const password = req.body.password;
+  const profileImg = req.body.profileImg;
+  const name = req.body.name;
 
   if (!email || !password) {
     return res
@@ -24,14 +26,15 @@ exports.signup = function(req, res, next) {
 
     const user = new User({
       email: email,
-      password: password
+      password: password,
+      profileImg: profileImg,
+      name: name
     });
 
     user.save(function(err) {
       if (err) {
         return next(err);
       }
-
       res.json({ token: tokenForUser(user) });
     });
   });
